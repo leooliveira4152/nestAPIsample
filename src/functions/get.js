@@ -21,10 +21,7 @@ module.exports.getFunction = async () => {
           var videoFile = Buffer.from(videoData.buffer); // get filedata
           fs.writeFileSync(fileName, videoFile);
         }
-        var videoLength = await getVideoDurationInSeconds(fileName);
-        videoLength = `${Math.floor(videoLength / 60)}min${Math.floor(
-          videoLength - Math.floor(videoLength / 60),
-        )}s`; // get video length using external lib
+        var videoLength = `${Math.round(await getVideoDurationInSeconds(fileName))}s`;
         resolve({
           title: data.title,
           year: new Date(videoData.date).getFullYear(),
